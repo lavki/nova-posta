@@ -1,0 +1,7 @@
+{
+  "param": {
+    "dsn":      "mysql:dbname=YOUR_DB_NAME;host=YOUR_HOST",
+    "user":     "USER_NAME",
+    "password": "PASSWORD"
+  }
+}
