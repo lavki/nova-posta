@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="/css/style.css">
         <title>Нова пошта - тестове завдання!</title>
+        <link rel="icon" href="/img/np.png">
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -17,16 +18,6 @@
     <body>
 
         <div class="container">
-            <ol>
-                <li>2020/05/07 - 2020/15/08</li>
-                <li>2020/05/07-2020/05/08</li>
-                <li>07/05/2020 - 08/12/2020</li>
-                <li>07/05/2020-08/26/2020</li>
-                <li>2020.05.07 - 2020.08.08</li>
-                <li>2020.05.07-2020.10.08</li>
-                <li>07.05.2020 - 08.01.2020</li>
-                <li>07.05.2020-02.10.2020</li>
-            </ol>
 
             <form action="/" method="post" id="dateInterval">
                 <div class="col">
@@ -35,7 +26,7 @@
                 <div class="col">
                     <button type="submit" id="post">POST</button>
                     <br>
-                    <button type="submit" id="ajax">AJAX</button>
+                    <button id="ajax">AJAX</button>
                 </div><!-- /.col -->
             </form>
 

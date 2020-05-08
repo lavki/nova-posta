@@ -13,23 +13,16 @@ use NovaPosta\Application\Repository\LogRepository;
 class Controller
 {
     /**
-     * @var DateValidator
-     */
-    private $validator;
-
-    /**
      * @var LogRepository
      */
     private $logRepository;
 
     /**
      * Controller constructor.
-     * @param DateValidator $validator
      * @param LogRepository $logRepository
      */
-    public function __construct(DateValidator $validator, LogRepository $logRepository)
+    public function __construct(LogRepository $logRepository)
     {
-        $this->validator = $validator;
         $this->logRepository = $logRepository;
     }
 
@@ -37,21 +30,39 @@ class Controller
     {
         $data = [];
 
+        if ($this->isAjax()) {
+            echo json_encode($this->dateService($_GET['dateInterval']));
+            return;
+        }
+
         if ($this->isPost()) {
-            $this->validator->validate($_POST['dateInterval']);
-
-            if ($this->validator->isValid()) {
-                $date = new Date($this->validator->getStartDate(), $this->validator->getEndDate());
-
-                $insertId = $this->logRepository->store($date);
-
-                $data['result'] = $this->logRepository->getDateDiffById($insertId);
-            } else {
-                $data['errors'] = $this->validator->getErrors();
-            }
+            $data = $this->dateService($_POST['dateInterval']);
         }
 
         view($data);
+    }
+
+    /**
+     * Work with date from client side
+     * @param string $userData
+     * @return string
+     */
+    private function dateService($userData)
+    {
+        $validator = new DateValidator();
+        $validator->validate($userData);
+
+        if ($validator->isValid()) {
+            $date = new Date($validator->getStartDate(), $validator->getEndDate());
+
+            $insertId = $this->logRepository->store($date);
+
+            $data['result'] = $this->logRepository->getDateDiffById($insertId);
+        } else {
+            $data['errors'] = $validator->getErrors();
+        }
+
+        return $data;
     }
 
     /**
@@ -60,5 +71,14 @@ class Controller
     private function isPost()
     {
         return ($_SERVER['REQUEST_METHOD'] === 'POST');
+    }
+
+    /**
+     * @return bool
+     */
+    private function isAjax()
+    {
+        return (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) &&
+            strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest');
     }
 }
