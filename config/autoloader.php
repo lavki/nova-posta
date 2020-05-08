@@ -10,8 +10,7 @@
 //\spl_autoload_register($underscores);
 
 $namespaces = function ($path) {
-
-    $file_path = str_replace('DoctrineOOP', 'application', dirname(__DIR__) . "\\{$path}.php");
+    $file_path = str_replace('NovaPosta', '', dirname(__DIR__) . "{$path}.php");
 
     if (preg_match('/\\\\/',  $file_path)) {
         $path = str_replace('\\', DIRECTORY_SEPARATOR, $file_path);

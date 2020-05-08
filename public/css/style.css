@@ -1,0 +1,42 @@
+.container {
+    margin: 1rem;
+}
+
+#result {
+    display: block;
+    width: 280px;
+    margin: 2rem 0;
+    padding: 1rem;
+    text-align: center;
+    border: 1px solid;
+}
+
+.error {
+    border-color: firebrick;
+    color: firebrick;
+}
+
+.success {
+    border-color: forestgreen;
+    color: forestgreen;
+}
+
+#dateInterval .col:first-child {
+    display: block;
+    float: left;
+}
+
+#dateInterval .col:last-child {
+    float: none;
+}
+
+#dateInterval textarea {
+    padding: .5rem;
+}
+
+#dateInterval .col button {
+    width: 70px;
+    padding: .5rem 1rem;
+    margin: 0 12px 8px 12px;
+    text-align: center;
+}
