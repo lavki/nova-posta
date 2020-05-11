@@ -19,12 +19,14 @@ class DB_Model
      */
     public function __construct()
     {
-        if (!file_exists(DB_CONFIG )) {
+        $file_config = DB_CONFIG . "/config/enviroment.json";
+
+        if (!file_exists($file_config )) {
             throw new \Exception('Configuration file does not exists');
-        } else if (!is_readable(DB_CONFIG )) {
+        } else if (!is_readable($file_config )) {
             throw new \Exception('Configuration file is not readable');
         } else {
-            $file = file_get_contents(DB_CONFIG );
+            $file = file_get_contents($file_config );
             $params = json_decode($file);
 
             if (!isset($params->param->dsn) || !isset($params->param->user) || !isset($params->param->password)) {
